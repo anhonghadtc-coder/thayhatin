@@ -1,4 +1,4 @@
-const API_URL = "DÁN_LINK_WEB_APP_APPS_SCRIPT_VÀO_ĐÂY";
+const API_URL = "https://script.google.com/macros/s/AKfycbzoFOl6UBvu398978uuFnt0fwEhvWoisOh_TWbiI1us5o1MnTwV0BuqQ8dZkKFzO9tLCg/exec";
 
 async function submitHomework(){
 
