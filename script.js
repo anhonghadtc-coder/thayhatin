@@ -1,5 +1,5 @@
 const WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbynx3Pa5aGyUwhg4Jv6LmGBxKBCmzGS6U1YBbNlyUzIG8Iz1bAqhCbujLwqZVKP4bn6Wg/exec";
+"https://script.google.com/macros/s/AKfycbxj9KO9kHj7gUCRvtG1uwLGiy67pG_lIaxgNIGY4XbyOqDVTr--XeTowrKe47Rg0zTddg/exec";
 
 async function guiBai() {
 
