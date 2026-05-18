@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nộp bài trình chiếu</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Nộp bài PowerPoint</title>
 
   <style>
 
@@ -15,16 +17,16 @@
     }
 
     body{
-      background:#f3f6fb;
+      background:#f1f5f9;
     }
 
     .topbar{
-      background:#ff4d4f;
+      background:#ef4444;
       color:white;
-      padding:18px;
+      padding:20px;
       font-size:28px;
       font-weight:bold;
-      box-shadow:0 2px 10px rgba(0,0,0,0.1);
+      text-align:center;
     }
 
     .container{
@@ -34,14 +36,13 @@
       background:white;
       padding:35px;
       border-radius:20px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.08);
+      box-shadow:0 5px 20px rgba(0,0,0,0.1);
     }
 
     h2{
-      margin-bottom:25px;
-      color:#222;
       text-align:center;
-      font-size:30px;
+      margin-bottom:25px;
+      color:#111827;
     }
 
     label{
@@ -49,7 +50,6 @@
       margin-top:18px;
       margin-bottom:8px;
       font-weight:bold;
-      color:#333;
     }
 
     input{
@@ -60,10 +60,9 @@
       font-size:16px;
     }
 
-    .filebox{
-      margin-top:10px;
-      padding:20px;
+    .upload-box{
       border:2px dashed #bbb;
+      padding:25px;
       border-radius:15px;
       text-align:center;
       background:#fafafa;
@@ -71,27 +70,26 @@
 
     button{
       width:100%;
-      padding:16px;
       margin-top:30px;
+      padding:16px;
       border:none;
-      border-radius:14px;
-      background:#1677ff;
+      border-radius:15px;
+      background:#2563eb;
       color:white;
       font-size:20px;
-      cursor:pointer;
-      transition:0.2s;
       font-weight:bold;
+      cursor:pointer;
     }
 
     button:hover{
-      background:#0958d9;
+      background:#1d4ed8;
     }
 
     #status{
       margin-top:20px;
       text-align:center;
-      font-weight:bold;
       font-size:18px;
+      font-weight:bold;
     }
 
     .success{
@@ -108,7 +106,7 @@
 <body>
 
   <div class="topbar">
-    📤 Nộp bài trình chiếu PowerPoint
+    📤 NỘP BÀI POWERPOINT
   </div>
 
   <div class="container">
@@ -119,7 +117,7 @@
     <input type="text" id="hoten" placeholder="Nhập họ tên">
 
     <label>Lớp</label>
-    <input type="text" id="lop" placeholder="Ví dụ: 5A2">
+    <input type="text" id="lop" placeholder="Ví dụ: 5A1">
 
     <label>Năm học</label>
     <input type="text" id="namhoc" value="2025-2026">
@@ -127,9 +125,9 @@
     <label>Giáo viên</label>
     <input type="text" id="giaovien" placeholder="Tên giáo viên">
 
-    <label>Chọn file PowerPoint (.ppt hoặc .pptx)</label>
+    <label>Chọn file PowerPoint</label>
 
-    <div class="filebox">
+    <div class="upload-box">
       <input type="file" id="file" accept=".ppt,.pptx">
     </div>
 
