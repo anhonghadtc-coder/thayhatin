@@ -1,48 +1,81 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbw_zwCqtNcXXWecFBZQUxl4K45Wfifvn9GBJzYHqlHaGfT23NLRXCplCITFDlZgejoJcA/exec";
+const WEB_APP_URL =
+"https://script.google.com/macros/s/PASTE_LINK_WEBAPP_O_DAY/exec";
 
-async function submitHomework(){
+async function guiBai() {
 
-  const fullname = document.getElementById("fullname").value.trim();
-  const className = document.getElementById("class").value.trim();
-  const schoolyear = document.getElementById("schoolyear").value.trim();
-  const teacher = document.getElementById("teacher").value.trim();
+  const hoten = document.getElementById("hoten").value;
+  const lop = document.getElementById("lop").value;
+  const namhoc = document.getElementById("namhoc").value;
+  const giaovien = document.getElementById("giaovien").value;
+
   const fileInput = document.getElementById("file");
+  const status = document.getElementById("status");
+
+  if (!hoten || !lop || !giaovien) {
+    status.innerHTML = "❌ Vui lòng nhập đầy đủ thông tin";
+    status.className = "error";
+    return;
+  }
+
+  if (fileInput.files.length === 0) {
+    status.innerHTML = "❌ Chưa chọn file";
+    status.className = "error";
+    return;
+  }
 
   const file = fileInput.files[0];
 
-  if(!fullname || !className || !schoolyear || !teacher){
-    alert("Vui lòng nhập đầy đủ thông tin");
-    return;
-  }
-
-  if(!file){
-    alert("Vui lòng chọn file PowerPoint");
-    return;
-  }
+  status.innerHTML = "⏳ Đang tải bài lên...";
+  status.className = "";
 
   const reader = new FileReader();
 
-  reader.onload = async function(){
+  reader.onload = async function() {
 
-    const base64 = reader.result.split(',')[1];
+    const base64 = reader.result.split(",")[1];
 
     const data = {
-      fullname,
-      className,
-      schoolyear,
-      teacher,
-      fileName: file.name,
-      mimeType: file.type,
+      hoten: hoten,
+      lop: lop,
+      namhoc: namhoc,
+      giaovien: giaovien,
+      name: file.name,
       file: base64
     };
 
-    await fetch(API_URL, {
-      method: "POST",
-      body: JSON.stringify(data)
-    });
+    try {
 
-    alert("✅ Gửi bài thành công");
-  }
+      const response = await fetch(WEB_APP_URL, {
+        method: "POST",
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      if (result.status === "success") {
+
+        status.innerHTML =
+          "✅ Đã nộp bài thành công";
+
+        status.className = "success";
+
+      } else {
+
+        status.innerHTML =
+          "❌ Lỗi: " + result.message;
+
+        status.className = "error";
+      }
+
+    } catch(err) {
+
+      status.innerHTML =
+        "❌ Không thể kết nối Apps Script";
+
+      status.className = "error";
+    }
+
+  };
 
   reader.readAsDataURL(file);
 }
