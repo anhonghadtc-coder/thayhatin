@@ -1,58 +1,105 @@
-const WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbyPBJ3iaRJFSoMwZ_A7DSmCeAXo_goGLog6exblBNLw8QPC-9veSArDFJd0qqNAEyPZwg/exec";
+const SCRIPT_URL =
+"PASTE_WEBAPP_URL";
+
 
 async function guiBai() {
 
-  const hoten = document.getElementById("hoten").value;
-  const lop = document.getElementById("lop").value;
-  const namhoc = document.getElementById("namhoc").value;
-  const giaovien = document.getElementById("giaovien").value;
+  const hoten =
+    document.getElementById("hoten").value;
 
-  const fileInput = document.getElementById("file");
-  const status = document.getElementById("status");
+  const lop =
+    document.getElementById("lop").value;
 
-  if (!hoten || !lop || !giaovien) {
-    status.innerHTML = "❌ Vui lòng nhập đầy đủ thông tin";
+  const namhoc =
+    document.getElementById("namhoc").value;
+
+  const giaovien =
+    document.getElementById("giaovien").value;
+
+  const fileInput =
+    document.getElementById("file");
+
+  const status =
+    document.getElementById("status");
+
+
+  // ===== KIỂM TRA =====
+
+  if(!hoten || !lop || !giaovien){
+
+    status.innerHTML =
+      "❌ Vui lòng nhập đầy đủ thông tin";
+
     status.className = "error";
+
     return;
   }
 
-  if (fileInput.files.length === 0) {
-    status.innerHTML = "❌ Chưa chọn file";
+  if(fileInput.files.length === 0){
+
+    status.innerHTML =
+      "❌ Vui lòng chọn file PowerPoint";
+
     status.className = "error";
+
     return;
   }
+
+
+  // ===== FILE =====
 
   const file = fileInput.files[0];
 
-  status.innerHTML = "⏳ Đang tải bài lên...";
+  status.innerHTML =
+    "⏳ Đang tải bài lên...";
+
   status.className = "";
+
+
+  // ===== ĐỌC FILE =====
 
   const reader = new FileReader();
 
-  reader.onload = async function() {
+  reader.readAsDataURL(file);
 
-    const base64 = reader.result.split(",")[1];
-
-    const data = {
-      hoten: hoten,
-      lop: lop,
-      namhoc: namhoc,
-      giaovien: giaovien,
-      name: file.name,
-      file: base64
-    };
+  reader.onload = async () => {
 
     try {
 
-      const response = await fetch(WEB_APP_URL, {
-        method: "POST",
-        body: JSON.stringify(data)
-      });
+      const base64 =
+        reader.result.split(",")[1];
 
-      const result = await response.json();
+      const data = {
 
-      if (result.status === "success") {
+        hoten: hoten,
+        lop: lop,
+        namhoc: namhoc,
+        giaovien: giaovien,
+
+        fileName: file.name,
+
+        fileData: base64
+      };
+
+
+      // ===== GỬI =====
+
+      const response = await fetch(
+        SCRIPT_URL,
+        {
+          method: "POST",
+          body: JSON.stringify(data)
+        }
+      );
+
+
+      const result =
+        await response.json();
+
+
+      // ===== THÀNH CÔNG =====
+
+      if(result.status === "success"){
 
         status.innerHTML =
           "✅ Đã nộp bài thành công";
@@ -62,12 +109,12 @@ async function guiBai() {
       } else {
 
         status.innerHTML =
-          "❌ Lỗi: " + result.message;
+          "❌ " + result.message;
 
         status.className = "error";
       }
 
-    } catch(err) {
+    } catch(err){
 
       status.innerHTML =
         "❌ Không thể kết nối Apps Script";
@@ -77,5 +124,4 @@ async function guiBai() {
 
   };
 
-  reader.readAsDataURL(file);
 }
