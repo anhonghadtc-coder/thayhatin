@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycby0cvcUf0oAM0K5Mkj3jme6AGPhVaQnPKVl6MtyClQyDSJiyZV43Ps6i58thkgSgD9SWA/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbw_zwCqtNcXXWecFBZQUxl4K45Wfifvn9GBJzYHqlHaGfT23NLRXCplCITFDlZgejoJcA/exec";
 
 async function submitHomework(){
 
